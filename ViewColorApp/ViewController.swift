@@ -27,16 +27,22 @@ class ViewController: UIViewController {
     
     @IBAction func redSliderAction() {
         redLabelInt.text = String(redSlider.value)
-        self.colorsWindows.backgroundColor = UIColor(red:CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 1)
+        self.colorsWindows.backgroundColor = UIColor(red:CGFloat(redSlider.value)/255,
+                                                     green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 1)
+        self.redSlider.minimumTrackTintColor = .red
     }
     @IBAction func greenSliderAction() {
         greenLabelInt.text = String(greenSlider.value)
-        self.colorsWindows.backgroundColor = UIColor(red:CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 1)
+        self.colorsWindows.backgroundColor = UIColor(red:CGFloat(redSlider.value)/255,
+                                                     green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 1)
+        self.greenSlider.minimumTrackTintColor = .green
     }
     
     @IBAction func blueSliderAction() {
         blueLabelInt.text = String(blueSlider.value)
-        self.colorsWindows.backgroundColor = UIColor(red:CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 1)
+        self.colorsWindows.backgroundColor = UIColor(red:CGFloat(redSlider.value)/255,
+                                                     green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 1)
+        self.blueSlider.minimumTrackTintColor = .blue
     }
 }
 
