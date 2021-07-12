@@ -23,26 +23,45 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         colorsWindows.layer.cornerRadius = 15
+        
+        redSlider.minimumValue = 1
+        redSlider.maximumValue = 100
+        redSlider.minimumTrackTintColor = .red
+        
+        greenSlider.minimumValue = 1
+        greenSlider.maximumValue = 100
+        greenSlider.minimumTrackTintColor = .green
+        
+        blueSlider.minimumValue = 1
+        blueSlider.maximumValue = 100
+        blueSlider.minimumTrackTintColor = .blue
     }
     
     @IBAction func redSliderAction() {
-        redLabelInt.text = String(redSlider.value)
-        self.colorsWindows.backgroundColor = UIColor(red:CGFloat(redSlider.value)/255,
-                                                     green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 1)
-        self.redSlider.minimumTrackTintColor = .red
+        redLabelInt.text = String(format: "%.2f", redSlider.value)
+        setColor()
+        
     }
+    
     @IBAction func greenSliderAction() {
-        greenLabelInt.text = String(greenSlider.value)
-        self.colorsWindows.backgroundColor = UIColor(red:CGFloat(redSlider.value)/255,
-                                                     green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 1)
-        self.greenSlider.minimumTrackTintColor = .green
+        greenLabelInt.text = String(format: "%.2f", greenSlider.value)
+        setColor()
+        
     }
     
     @IBAction func blueSliderAction() {
-        blueLabelInt.text = String(blueSlider.value)
-        self.colorsWindows.backgroundColor = UIColor(red:CGFloat(redSlider.value)/255,
-                                                     green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: 1)
-        self.blueSlider.minimumTrackTintColor = .blue
+        blueLabelInt.text = String(format: "%.2f", blueSlider.value)
+        setColor()
+        
     }
+    
+    private func setColor() {
+        self.colorsWindows.backgroundColor = UIColor(
+            red:CGFloat(redSlider.value)/255,
+            green: CGFloat(greenSlider.value)/255,
+            blue: CGFloat(blueSlider.value)/255,
+            alpha: 1)
+    }
+    
 }
 
