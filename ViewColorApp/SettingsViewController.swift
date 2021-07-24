@@ -19,9 +19,12 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var greenSlider: UISlider!
     @IBOutlet weak var blueSlider: UISlider!
     
+    @IBOutlet weak var redTF: UITextField!
+    @IBOutlet weak var greenTF: UITextField!
+    @IBOutlet weak var blueTF: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         colorsWindows.layer.cornerRadius = 15
         
         redSlider.minimumTrackTintColor = .red
@@ -37,14 +40,17 @@ class SettingsViewController: UIViewController {
     
     @IBAction func rgbSlider(_ sender: UISlider) {
         setColor()
-                
+        
         switch sender {
         case redSlider: setValue(for: redLabelInt)
         case greenSlider: setValue(for: greenLabelInt)
         default: setValue(for: blueLabelInt)
         }
     }
-  
+    
+    @IBAction func doneButton(_ sender: Any) {
+    }
+    
     private func setColor() {
         colorsWindows.backgroundColor = UIColor(
             red:CGFloat(redSlider.value),
