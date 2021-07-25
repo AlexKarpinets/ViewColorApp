@@ -9,6 +9,7 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
+    // MARK: - IBOutlets
     @IBOutlet weak var colorsWindows: UIView!
     
     @IBOutlet weak var redLabelInt: UILabel!
@@ -23,7 +24,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var greenTF: UITextField!
     @IBOutlet weak var blueTF: UITextField!
     
-    //    var delegate: SettingsViewControllerDelegate!
+    // MARK: - Properties
+    var delegate: SettingsViewControllerDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,9 +43,16 @@ class SettingsViewController: UIViewController {
         blueTF.text = String(format: "%.2f", blueSlider.value)
         
         setColor()
-        setValue(for: redLabelInt, greenLabelInt, blueLabelInt, and: redTF, greenTF, blueTF)
+        setValue(for: redLabelInt, greenLabelInt, blueLabelInt,
+                 and: redTF, greenTF, blueTF)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super .touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
+    
+    //MARK: - IBActions
     @IBAction func rgbSlider(_ sender: UISlider) {
         setColor()
         
@@ -55,10 +64,15 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func doneButton(_ sender: Any) {
-        //        delegate.setColors(red: <#T##String#> ?? "0", green: <#T##String#>, blue: <#T##String#>)
+        delegate.setViewColors(colors: UIColor(
+                                red:CGFloat(redSlider.value),
+                                green: CGFloat(greenSlider.value),
+                                blue: CGFloat(blueSlider.value),
+                                alpha: 1))
         dismiss(animated: true)
     }
     
+    // MARK: - Private func
     private func setColor() {
         colorsWindows.backgroundColor = UIColor(
             red:CGFloat(redSlider.value),
@@ -72,8 +86,10 @@ class SettingsViewController: UIViewController {
     }
 }
 
+// MARK: - Extensions
 extension SettingsViewController {
-    private func setValue(for labels: UILabel..., and textFields: UITextField...) {
+    private func setValue(for labels: UILabel...,
+                          and textFields: UITextField...) {
         labels.forEach { label in
             switch label {
             case redLabelInt:
@@ -96,4 +112,3 @@ extension SettingsViewController {
         }
     }
 }
-
