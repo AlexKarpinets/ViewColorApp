@@ -23,6 +23,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var greenTF: UITextField!
     @IBOutlet weak var blueTF: UITextField!
     
+    //    var delegate: SettingsViewControllerDelegate!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         colorsWindows.layer.cornerRadius = 15
@@ -34,21 +36,27 @@ class SettingsViewController: UIViewController {
         greenLabelInt.text = String(format: "%.2f", greenSlider.value)
         blueLabelInt.text = String(format: "%.2f", blueSlider.value)
         
+        redTF.text = String(format: "%.2f", redSlider.value)
+        greenTF.text = String(format: "%.2f", greenSlider.value)
+        blueTF.text = String(format: "%.2f", blueSlider.value)
+        
         setColor()
-        setValue(for: redLabelInt, greenLabelInt, blueLabelInt)
+        setValue(for: redLabelInt, greenLabelInt, blueLabelInt, and: redTF, greenTF, blueTF)
     }
     
     @IBAction func rgbSlider(_ sender: UISlider) {
         setColor()
         
         switch sender {
-        case redSlider: setValue(for: redLabelInt)
-        case greenSlider: setValue(for: greenLabelInt)
-        default: setValue(for: blueLabelInt)
+        case redSlider: setValue(for: redLabelInt, and: redTF)
+        case greenSlider: setValue(for: greenLabelInt, and: greenTF)
+        default: setValue(for: blueLabelInt, and: blueTF)
         }
     }
     
     @IBAction func doneButton(_ sender: Any) {
+        //        delegate.setColors(red: <#T##String#> ?? "0", green: <#T##String#>, blue: <#T##String#>)
+        dismiss(animated: true)
     }
     
     private func setColor() {
@@ -65,7 +73,7 @@ class SettingsViewController: UIViewController {
 }
 
 extension SettingsViewController {
-    private func setValue(for labels: UILabel...) {
+    private func setValue(for labels: UILabel..., and textFields: UITextField...) {
         labels.forEach { label in
             switch label {
             case redLabelInt:
@@ -74,6 +82,16 @@ extension SettingsViewController {
                 label.text = string(from: greenSlider)
             default:
                 label.text = string(from: blueSlider)
+            }
+        }
+        textFields.forEach { textField in
+            switch textField {
+            case redTF:
+                textField.text = string(from: redSlider)
+            case greenTF:
+                textField.text = string(from: greenSlider)
+            default:
+                textField.text = string(from: blueSlider)
             }
         }
     }

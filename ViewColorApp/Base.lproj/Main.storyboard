@@ -49,6 +49,9 @@
                                 <rect key="frame" x="159" y="541" width="66" height="47"/>
                                 <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="30"/>
                                 <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="doneButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CzE-4O-3DQ"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="zs2-WC-fW7">
                                 <rect key="frame" x="16" y="261.5" width="343" height="114.5"/>
@@ -193,11 +196,14 @@
                     <connections>
                         <outlet property="blueLabelInt" destination="XLq-Ie-2Sq" id="zs4-Au-Ewe"/>
                         <outlet property="blueSlider" destination="rTh-bd-PoA" id="OTL-XQ-F38"/>
+                        <outlet property="blueTF" destination="a3u-I7-JK2" id="slD-ZG-pXt"/>
                         <outlet property="colorsWindows" destination="zYn-ca-b2V" id="6qf-8H-uTq"/>
                         <outlet property="greenLabelInt" destination="a87-Zs-eEd" id="kKx-ud-KkE"/>
                         <outlet property="greenSlider" destination="0gV-US-8SA" id="XBH-d6-oLU"/>
+                        <outlet property="greenTF" destination="vZV-I1-hfd" id="X0s-Qr-x3f"/>
                         <outlet property="redLabelInt" destination="oEI-Ph-q7j" id="VPv-3S-4hj"/>
                         <outlet property="redSlider" destination="hCQ-Sf-8rL" id="d7Z-is-akH"/>
+                        <outlet property="redTF" destination="9JL-3L-Enj" id="uLs-Gu-Qh7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
