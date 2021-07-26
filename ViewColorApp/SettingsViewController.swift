@@ -26,25 +26,20 @@ class SettingsViewController: UIViewController {
     
     // MARK: - Properties
     var delegate: SettingsViewControllerDelegate!
+    var currentColor: UIColor!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         colorsWindows.layer.cornerRadius = 15
-        
+       
         redSlider.minimumTrackTintColor = .red
         greenSlider.minimumTrackTintColor = .green
         
-        redLabelInt.text = String(format: "%.2f", redSlider.value)
-        greenLabelInt.text = String(format: "%.2f", greenSlider.value)
-        blueLabelInt.text = String(format: "%.2f", blueSlider.value)
-        
-        redTF.text = String(format: "%.2f", redSlider.value)
-        greenTF.text = String(format: "%.2f", greenSlider.value)
-        blueTF.text = String(format: "%.2f", blueSlider.value)
-        
+        colorsWindows.backgroundColor = currentColor
+        setSliders()
         setColor()
-        setValue(for: redLabelInt, greenLabelInt, blueLabelInt,
-                 and: redTF, greenTF, blueTF)
+        setValue(for: redLabelInt, greenLabelInt, blueLabelInt)
+        setValue(for: redTF, greenTF, blueTF)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -57,18 +52,20 @@ class SettingsViewController: UIViewController {
         setColor()
         
         switch sender {
-        case redSlider: setValue(for: redLabelInt, and: redTF)
-        case greenSlider: setValue(for: greenLabelInt, and: greenTF)
-        default: setValue(for: blueLabelInt, and: blueTF)
+        case redSlider:
+            setValue(for: redLabelInt)
+            setValue(for: redTF)
+        case greenSlider:
+            setValue(for: greenLabelInt)
+            setValue(for: greenTF)
+        default:
+            setValue(for: blueLabelInt)
+            setValue(for: blueTF)
         }
     }
     
     @IBAction func doneButton(_ sender: Any) {
-        delegate.setViewColors(colors: UIColor(
-                                red:CGFloat(redSlider.value),
-                                green: CGFloat(greenSlider.value),
-                                blue: CGFloat(blueSlider.value),
-                                alpha: 1))
+        delegate.setViewColors(colors: colorsWindows.backgroundColor ?? .white)
         dismiss(animated: true)
     }
     
@@ -84,12 +81,19 @@ class SettingsViewController: UIViewController {
     private func string(from slider: UISlider) -> String {
         String(format: "%.2f", slider.value)
     }
+    
+    private func setSliders() {
+        let ciColor = CIColor(color: currentColor)
+        
+        redSlider.value = Float(ciColor.red)
+        greenSlider.value = Float(ciColor.green)
+        blueSlider.value = Float(ciColor.blue)
+    }
 }
 
 // MARK: - Extensions
 extension SettingsViewController {
-    private func setValue(for labels: UILabel...,
-                          and textFields: UITextField...) {
+    private func setValue(for labels: UILabel...) {
         labels.forEach { label in
             switch label {
             case redLabelInt:
@@ -100,6 +104,8 @@ extension SettingsViewController {
                 label.text = string(from: blueSlider)
             }
         }
+    }
+    private func setValue (for textFields: UITextField...) {
         textFields.forEach { textField in
             switch textField {
             case redTF:
@@ -112,3 +118,4 @@ extension SettingsViewController {
         }
     }
 }
+
